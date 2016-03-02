@@ -1,42 +1,82 @@
-#include <iostream>
-#include <OpenGL/gl.h>
+#include <stdio.h>
+
+#include <GL/glew.h>
 #include <GLUT/glut.h>
 
-using namespace std;
-void display(){
+struct Vector3f
+{
+	float x;
+	float y;
+	float z;
+
+	Vector3f()
+	{
+	}
+
+	Vector3f(float _x, float _y, float _z)
+	{
+		x = _x;
+		y = _y;
+		z = _z;
+	}
+};
+
+GLuint VBO;
+
+static void RenderSceneCB()
+{
 	glClear(GL_COLOR_BUFFER_BIT);
-	
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_POLYGON);
-	glVertex3f(0.25,0.25,0.0);
-	glVertex3f(0.75,0.25,0.0);
-	glVertex3f(0.75,0.75,0.0);
-	glVertex3f(0.25,0.75,0.0);
-	glEnd();
-	
-	glFlush();
-	
+
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	glDrawArrays(GL_POINTS, 0, 1);
+
+	glDisableVertexAttribArray(0);
+
+	glutSwapBuffers();
 }
 
-void init(){
-	glClearColor(0.0,0.0,0.0,0.0);
-	
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+
+static void InitializeGlutCallbacks()
+{
+	glutDisplayFunc(RenderSceneCB);
 }
-int main(int argc, const char * argv[]) {
-	// insert code here...
-	
-	cout << "Hello World";
-	glutInit(&argc,(char **)argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(250, 250);
+
+static void CreateVertexBuffer()
+{
+	Vector3f Vertices[1];
+	Vertices[0] = Vector3f(0.0f, 0.0f, 0.0f);
+
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+}
+
+
+int main(int argc, char** argv)
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
+	glutInitWindowSize(1024, 768);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("hello");
-	init();
-	glutDisplayFunc(display);
+	glutCreateWindow("Tutorial 02");
+
+	InitializeGlutCallbacks();
+
+	// Must be done after glut is initialized!
+	GLenum res = glewInit();
+	if (res != GLEW_OK) {
+		fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
+		return 1;
+	}
+
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+	CreateVertexBuffer();
+
 	glutMainLoop();
-	
+
 	return 0;
 }
