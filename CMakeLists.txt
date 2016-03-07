@@ -1,18 +1,18 @@
 cmake_minimum_required(VERSION 3.3)
-project(openGL_test)
+project(glChurch)
 
 set(SOURCE_FILES
-    openGL_test/main.cpp)
+	${PROJECT_NAME}/main.cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 include_directories(
-        ${CMAKE_CURRENT_SOURCE_DIR}/openGL_test
+	${CMAKE_CURRENT_SOURCE_DIR}/glChurch
         ${GLEW_INCLUDE_DIRS}
 )
 
 
-add_executable(openGL_test ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 # Frameworks: OpenGL, GLUT
 
@@ -36,4 +36,4 @@ if (GLEW_FOUND)
 endif()
 
 
-target_link_libraries(openGL_test ${EXTRA_LIBS})
+target_link_libraries(${PROJECT_NAME} ${EXTRA_LIBS})
