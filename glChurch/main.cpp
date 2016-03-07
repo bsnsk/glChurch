@@ -2,25 +2,7 @@
 
 #include <GL/glew.h>
 #include <GLUT/glut.h>
-
-struct Vector3f
-{
-	float x;
-	float y;
-	float z;
-
-	Vector3f()
-	{
-	}
-
-	Vector3f(float _x, float _y, float _z)
-	{
-		x = _x;
-		y = _y;
-		z = _z;
-	}
-};
-
+#include <glm/glm.hpp>
 GLuint VBO;
 
 static void RenderSceneCB()
@@ -46,8 +28,8 @@ static void InitializeGlutCallbacks()
 
 static void CreateVertexBuffer()
 {
-	Vector3f Vertices[1];
-	Vertices[0] = Vector3f(0.0f, 0.0f, 0.0f);
+	glm::vec3 Vertices[1];
+	Vertices[0] = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
