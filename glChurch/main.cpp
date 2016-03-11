@@ -8,7 +8,6 @@
 #include "GLM_NR/glm.h"
 
 using namespace std;
-const char* datapath = "/Users/Dora/Courses/2016_spring/ComputerGraphics/glChurch";
 
 GLuint VBO;
 GLMmodel *obj_bunny;
@@ -51,9 +50,9 @@ void init()
 	if (!obj_bunny)
 	{
 		char filename[256];
-		strcpy(filename, datapath);
-		strcat(filename, "/Data/bunny.obj");
-		obj_bunny = glmReadOBJ(filename);
+		//strcpy(filename, datapath);
+		//strcat(filename, "/Data/bunny.obj");
+		obj_bunny = glmReadOBJ("../Data/bunny.obj");
 		if (!obj_bunny)
 			exit(0);
 
