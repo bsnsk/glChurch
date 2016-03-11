@@ -1,15 +1,22 @@
 #include <stdio.h>
+#include <string.h>
+#include <iostream>
 
 #include <GL/glew.h>
 #include <GLUT/glut.h>
 #include <glm/glm.hpp>
+#include "GLM_NR/glm.h"
+
+using namespace std;
+const char* datapath = "/Users/Dora/Courses/2016_spring/ComputerGraphics/glChurch";
+
 GLuint VBO;
+GLMmodel *obj_bunny;
 
 static void RenderSceneCB()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glEnableVertexAttribArray(0);
+	glmDraw(obj_bunny, GLM_SMOOTH | GLM_MATERIAL);
+	/*glClear(GL_COLOR_BUFFER_BIT);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
@@ -17,7 +24,7 @@ static void RenderSceneCB()
 
 	glDisableVertexAttribArray(0);
 
-	glutSwapBuffers();
+	glutSwapBuffers();*/
 }
 
 
@@ -37,13 +44,32 @@ static void CreateVertexBuffer()
 }
 
 
+void init()
+{
+	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+
+	if (!obj_bunny)
+	{
+		char filename[256];
+		strcpy(filename, datapath);
+		strcat(filename, "/Data/bunny.obj");
+		obj_bunny = glmReadOBJ(filename);
+		if (!obj_bunny)
+			exit(0);
+
+		glmUnitize(obj_bunny);
+		glmFacetNormals(obj_bunny);
+		glmVertexNormals(obj_bunny, 90.0);
+	}
+}
+
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowSize(1024, 768);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Tutorial 02");
+	glutCreateWindow("Church");
 
 	InitializeGlutCallbacks();
 
@@ -54,10 +80,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-
-	CreateVertexBuffer();
-
+	init();
 	glutMainLoop();
 
 	return 0;

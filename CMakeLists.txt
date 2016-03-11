@@ -2,16 +2,19 @@ cmake_minimum_required(VERSION 3.3)
 project(glChurch)
 
 set(SOURCE_FILES
-	${PROJECT_NAME}/main.cpp)
+	${PROJECT_NAME}/main.cpp ThirdParty/GLM_NR/glm.cpp ThirdParty/GLM_NR/glm.h)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 include_directories(
-	${CMAKE_CURRENT_SOURCE_DIR}/glChurch
+        ${CMAKE_CURRENT_SOURCE_DIR}/glChurch
         ${GLEW_INCLUDE_DIRS}
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+
+# Third Party
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
 # Frameworks: OpenGL, GLUT
 
@@ -21,7 +24,7 @@ IF (APPLE)
     find_library (OpenGL_LIBRARY OpenGL)
     mark_as_advanced (GLUT_LIBRARY
             OpenGL_LIBRARY)
-    set(EXTRA_LIBS ${GLUT_LIBRARY} ${OpenGL_LIBRARY} /usr/local/lib)
+    set(EXTRA_LIBS ${GLUT_LIBRARY} ${OpenGL_LIBRARY})
 ENDIF (APPLE)
 
 # GLEW (install first)
