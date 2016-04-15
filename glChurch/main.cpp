@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include <GL/glew.h>
-#include <GLUT/glut.h>
+#include <GL/glut.h>
 #include <glm/glm.hpp>
 #include "GLM_NR/glm.h"
 
@@ -15,15 +15,11 @@ GLMmodel *obj_bunny;
 static void RenderSceneCB()
 {
 	glmDraw(obj_bunny, GLM_SMOOTH | GLM_MATERIAL);
-	/*glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-	glDrawArrays(GL_POINTS, 0, 1);
-
 	glDisableVertexAttribArray(0);
-
-	glutSwapBuffers();*/
+	glutSwapBuffers();
 }
 
 
