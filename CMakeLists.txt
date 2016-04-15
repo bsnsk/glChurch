@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.3)
 project(glChurch)
 
-set(SOURCE_FILES
-        ${PROJECT_NAME}/mainWin.cpp)
+
+set(SOURCE_FILES ${PROJECT_NAME}/main.cpp ThirdParty/GLM_NR/glm.cpp ThirdParty/GLM_NR/glm.h)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -49,8 +49,6 @@ IF(WIN32)
             "F:\\\\MinGW\\\\lib\\\\libfreeglut.a"
             "F:\\\\MinGW\\\\lib\\\\libfreeglutdll.a"
             )
-
-    target_link_libraries(${PROJECT_NAME} ${EXTRA_LIBS})
 
 ENDIF(WIN32)
 

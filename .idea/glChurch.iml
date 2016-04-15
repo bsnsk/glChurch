@@ -2,8 +2,10 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/glChurch/mainWin.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/glChurch/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ThirdParty/GLM_NR/glm.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ThirdParty/GLM_NR/glm.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

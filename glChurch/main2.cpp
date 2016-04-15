@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <OpenGL/gl.h>
-#include <GL/glut.h>
+#include <GLUT/glut.h>
 
 //#include <GL/glew.h>
 
